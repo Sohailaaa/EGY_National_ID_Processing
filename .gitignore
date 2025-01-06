@@ -1,0 +1,77 @@
+# Byte-compiled / optimized / DLL files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.so
+
+# C extensions
+*.c
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.pyo
+*.sqlite3
+
+# Local environment variables
+.env
+
+# Media files
+/media/
+
+# Node.js modules (if using Node.js for front-end)
+node_modules/
+
+# Virtual environment
+venv/
+ENV/
+env/
+
+# VSCode and other editors' configuration
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# Test coverage reports
+htmlcov/
+.tox/
+.nox/
+
+# Linting and testing
+*.cover
+.coverage
+.cache
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.code-workspace
+
+# Static files
+/static/
+
+# Compiled code
+*.o
+*.pyc
+
+# MySQL dumps
+*.sql
+
+# Gunicorn logs
+gunicorn.error.log
+gunicorn.access.log
+
+# Docker and Kubernetes
+*.swp
+docker-compose.override.yml
+.dockerignore
+*.pid
