@@ -5,36 +5,6 @@
 </head>
 <body>
     <h1>Egyptian National ID Validator</h1>
-    <form id="validator-form">
-        <input id="national-id" type="text" placeholder="Enter National ID" required>
-        <button type="submit">Validate</button>
-    </form>
-    <pre id="response"></pre>
 
-    <script>
-        const form = document.getElementById('validator-form');
-        const responseElement = document.getElementById('response');
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const nationalID = document.getElementById('national-id').value;
-
-            try {
-                const response = await fetch('/api/national-id/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'ApiKey YOUR_API_KEY'
-                    },
-                    body: JSON.stringify({ national_id: nationalID }),
-                });
-
-                const data = await response.json();
-                responseElement.textContent = JSON.stringify(data, null, 2);
-            } catch (error) {
-                responseElement.textContent = 'Error: ' + error.message;
-            }
-        });
-    </script>
 </body>
 </html>
