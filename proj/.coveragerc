@@ -3,7 +3,12 @@
 omit =
     */migrations/*
     */admin.py
-    */National_ID_Processing/tests.py
+    */National_ID_Processing/models.py
+    */National_ID_Processing/serializers.py
+    */National_ID_Processing/urls.py
+    */National_ID_Processing/__init__.py
+    */National_ID_Processing/apps.py
+
 
 # Enable branch coverage
 branch = True

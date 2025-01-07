@@ -3,7 +3,8 @@ from rest_framework.test import APIClient
 from unittest.mock import Mock
 from datetime import datetime
 from rest_framework_api_key.models import APIKey
-from .helpers import validate_national_id, extract_info
+from National_ID_Processing.helpers import validate_national_id, extract_info
+import pytest 
 
 class NationalIDTests(TestCase):
     def setUp(self):
@@ -60,30 +61,38 @@ class NationalIDTests(TestCase):
                 self.assertIn("birth_day", extracted_info, f"Birth day missing for {test_case['description']}")
                 self.assertIn("gender", extracted_info, f"Gender missing for {test_case['description']}")
 
-def test_api_endpoint(self):
-    """Test the National ID API endpoint."""
-    client = APIClient()
+    def test_api_endpoint(self):
+        """Test the National ID API endpoint with proper authentication."""
+        # Create a test API key
+        _, key = APIKey.objects.create_key(name="test")
+        authorization = f"Api-Key {key}"
 
-    # Set the headers with the API key
-    headers = {"HTTP_AUTHORIZATION": f"Api-Key {self.api_key}"}
-    
-    # Debugging: Print API key to ensure it's correctly set
-    print(f"API Key used: {self.api_key}")
+        # Test valid ID
+        response = self.client.post(
+            "/api/national-id/",
+            {"national_id": self.valid_ids[0]["id"]},
+            HTTP_AUTHORIZATION=authorization,
+            format="json",
+        )
+        print(f"Response status code for valid ID: {response.status_code}")
+        print(f"Response content for valid ID: {response.data}")
+        self.assertEqual(response.status_code, 200, f"Unexpected status code: {response.status_code}")
+        self.assertIn("data", response.data, "Response does not contain 'data'")
+        self.assertIn("message", response.data, "Response does not contain 'message'")
 
-    # Test valid ID
-    response = client.post("/api/national-id/", {"national_id": self.valid_ids[0]["id"]}, **headers)
-    print(response.status_code)  # Debugging: Check the response status code
-    self.assertEqual(response.status_code, 200)
-    self.assertIn("data", response.data)
-    self.assertIn("message", response.data)
-
-    # Test invalid IDs
-    for case in self.invalid_ids:
-        with self.subTest(test_case=case):
-            response = client.post("/api/national-id/", {"national_id": case["id"]}, **headers)
-            print(response.status_code)  # Debugging: Check the response status code
-            self.assertEqual(response.status_code, 400)
-            self.assertIn("error", response.data)
+        # Test invalid IDs
+        for case in self.invalid_ids:
+            with self.subTest(test_case=case):
+                response = self.client.post(
+                    "/api/national-id/",
+                    {"national_id": case["id"]},
+                    HTTP_AUTHORIZATION=authorization,
+                    format="json",
+                )
+                print(f"Response status code for invalid ID ({case['id']}): {response.status_code}")
+                print(f"Response content for invalid ID ({case['id']}): {response.data}")
+                self.assertEqual(response.status_code, 400, f"Unexpected status code: {response.status_code}")
+                self.assertIn("error", response.data, f"Response for invalid ID ({case['id']}) does not contain 'error'")
 
 
     def test_extract_info_with_valid_ids(self):
