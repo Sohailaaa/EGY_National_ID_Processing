@@ -20,5 +20,4 @@ class EGYNationalIDInfo(models.Model):
     birth_day = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return f"{self.national_id} - {self.birth_year}-{self.birth_month}-{self.birth_day}"
+

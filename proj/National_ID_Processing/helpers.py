@@ -35,10 +35,7 @@ def validate_national_id(national_id, current_date=None):
         full_birth_year = 1900 + birth_year
     elif national_id[0] == '3':  # Born in the 2000s
         full_birth_year = 2000 + birth_year
-    else:
-        print("Invalid first digit. It should be 2 or 3.")
-        return False, "Invalid first digit in National ID. It must be 2 or 3."
-
+  
     # Validate month (1 to 12)
     if month < 1 or month > 12:
         print("Invalid month in National ID.")
@@ -72,9 +69,6 @@ def extract_info(national_id):
     """
     Extracts information like birth year, month, day, and gender from a valid national ID.
     """
-    is_valid, error_message = validate_national_id(national_id)
-    if not is_valid:
-        raise ValueError(error_message)
 
     # Extract components
     birth_year = int(national_id[1:3])  # YY
@@ -86,9 +80,7 @@ def extract_info(national_id):
         full_birth_year = 1900 + birth_year
     elif national_id[0] == '3':  # Born in the 2000s
         full_birth_year = 2000 + birth_year
-    else:
-        raise ValueError("Invalid first digit in National ID. It must be 2 or 3.")
-
+  
     # Determine gender based on the 13th digit (odd for male, even for female)
     gender_digit = int(national_id[12])
     gender = "female" if gender_digit % 2 == 0 else "male"

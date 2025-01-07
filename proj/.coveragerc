@@ -1,0 +1,18 @@
+[run]
+# Files or directories to omit from coverage
+omit =
+    */migrations/*
+    */admin.py
+    */National_ID_Processing/tests.py
+
+# Enable branch coverage
+branch = True
+
+[report]
+# Show missing lines in the coverage report
+show_missing = True
+# Sort the report by the file name
+sort = Name
+[html]
+# Directory to save HTML coverage reports
+directory = coverage_html_report
