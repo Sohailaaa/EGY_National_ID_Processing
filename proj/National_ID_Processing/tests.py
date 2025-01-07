@@ -63,26 +63,37 @@ class NationalIDTests(TestCase):
                 self.assertIn("birth_day", extracted_info, f"Birth day missing for {description}: {national_id}")
                 self.assertIn("gender", extracted_info, f"Gender missing for {description}: {national_id}")
     
-'''
-    def test_api_endpoint(self):
-        """
-        Test the API endpoint with valid and invalid IDs.
-        """
-        # Pass the API key in the header for authentication
-        self.client.credentials(HTTP_AUTHORIZATION=f"Api-Key {self.api_key}")
 
-        # Valid ID case
-        response = self.client.post("/api/national-id/", {"national_id": "29001011234567"})
-        self.assertEqual(response.status_code, 200)
-        self.assertIn("data", response.data)
-        self.assertIn("message", response.data)
+def test_api_endpoint(self):
+    """
+    Test the API endpoint with valid and invalid IDs.
+    """
+    # Initialize APIClient
+    self.client = APIClient()
 
-        # Invalid ID cases
-        for case in self.invalid_ids:
-            with self.subTest(msg=case["description"], id=case["id"]):
-                response = self.client.post("/api/national-id/", {"national_id": case["id"]})
-                self.assertEqual(response.status_code, 400)
-                self.assertIn("error", response.data)
+    # Set the headers with the API key
+    headers = {"HTTP_AUTHORIZATION": f"Api-Key {self.api_key}"}
+
+    # Valid ID case
+    response = self.client.post(
+        "/api/national-id/", 
+        {"national_id": "29001011234567"}, 
+        **headers
+    )
+    self.assertEqual(response.status_code, 200)
+    self.assertIn("data", response.data)
+    self.assertIn("message", response.data)
+
+    # Invalid ID cases
+    for case in self.invalid_ids:
+        with self.subTest(msg=case["description"], id=case["id"]):
+            response = self.client.post(
+                "/api/national-id/", 
+                {"national_id": case["id"]}, 
+                **headers
+            )
+            self.assertEqual(response.status_code, 400)
+            self.assertIn("error", response.data)
 
     def test_extract_info_with_valid_ids(self):
         """
@@ -96,4 +107,4 @@ class NationalIDTests(TestCase):
                 self.assertIn("birth_month", result)
                 self.assertIn("birth_day", result)
                 
-'''
+

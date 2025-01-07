@@ -9,7 +9,7 @@ Content-Type: application/json
 ### Test the National ID API with Authentication
 POST http://localhost:8000/api/national-id/ HTTP/1.1
 Content-Type: application/json
-Authorization: Api-Key aZnDwBsb.PlXSLiVx1WGHEvqwqWeZlhwpObn7MaJ7
+Authorization: Api-Key {{API_KEY}}
 
 {
   "national_id": "29001011234567"
@@ -18,7 +18,8 @@ Authorization: Api-Key aZnDwBsb.PlXSLiVx1WGHEvqwqWeZlhwpObn7MaJ7
 ### Test with Invalid National ID
 POST http://localhost:8000/api/national-id/
 Content-Type: application/json
-Authorization: Api-Key aZnDwBsb.PlXSLiVx1WGHEvqwqWeZlhwpObn7MaJ7
+Authorization: Api-Key 
+
 
 {
   "national_id": "12345678901234"
