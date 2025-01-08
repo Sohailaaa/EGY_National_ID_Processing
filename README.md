@@ -93,6 +93,11 @@ These instructions will help you set up and run the project locally.
 ### Testing
 
 1. The project uses `pytest` for testing.
+   
+### API logs
+![image](https://github.com/user-attachments/assets/23971ce1-bbed-4563-86ad-f548522bef02)
+### National id extract info
+![image](https://github.com/user-attachments/assets/330a245c-642a-4d0b-9236-96f94c571ec8)
 
 ### Code Quality
 
