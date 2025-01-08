@@ -101,6 +101,8 @@ These instructions will help you set up and run the project locally.
 
 ### Explanation of Key Files
 
+`National_ID_Processing` is django app that contains:
+
 * **`views.py`** : Contains the API logic for validating and extracting data from the Egyptian National ID. It also handles rate limiting and API key permissions.
 * **`models.py`** : Defines the models for logging API calls (`APILog`) and storing validated national ID data (`EGYNationalIDInfo`).
 * **`helpers.py`** : Includes the functions to validate the national ID and extract relevant information.

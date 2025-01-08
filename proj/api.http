@@ -18,8 +18,7 @@ Authorization: Api-Key {{API_KEY}}
 ### Test with Invalid National ID
 POST http://localhost:8000/api/national-id/
 Content-Type: application/json
-Authorization: Api-Key 
-
+Authorization: Api-Key {{API_KEY}}
 
 {
   "national_id": "12345678901234"
