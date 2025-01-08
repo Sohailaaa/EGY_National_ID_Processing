@@ -30,9 +30,7 @@ class NationalIDValidatorView(APIView):
     @method_decorator(ratelimit(key='ip', rate='10/m', block=True))
     def post(self, request):
         national_id = request.data.get("national_id")
-        if not national_id:
-            return Response({"error": "National ID is required."}, status=400)
-
+      
         is_valid, error_message = validate_national_id(national_id)
         if not is_valid:
             return Response({"error": error_message}, status=400)

@@ -5,6 +5,8 @@ from datetime import datetime
 from rest_framework_api_key.models import APIKey
 from National_ID_Processing.helpers import validate_national_id, extract_info
 import pytest 
+from django.urls import reverse
+
 
 class NationalIDTests(TestCase):
     def setUp(self):
@@ -24,13 +26,13 @@ class NationalIDTests(TestCase):
             {"id": "29001000123456", "description": "Invalid day (day 0)"},
             {"id": "49001000123456", "description": "Invalid century"},
 
-
         ]
 
         # Test data: Valid IDs
         self.valid_ids = [
             {"id": "29001011234567", "description": "Valid National ID, male"},
-            {"id": "32402222234568", "description": "Valid leap year date (February 29th), female"},
+            {"id": "32402292234568", "description": "Valid leap year date (February 29th), female"},
+
         ]
 
     def test_invalid_ids(self):
@@ -105,3 +107,9 @@ class NationalIDTests(TestCase):
                 self.assertIn("birth_month", result)
                 self.assertIn("birth_day", result)
                 self.assertIn("gender", result)
+
+    def test_index_view(self):
+        """Test the index view renders the correct template."""
+        response = self.client.get(reverse('index'))  # Assuming the URL name for `index` is 'index'
+        self.assertEqual(response.status_code, 200, "Index view should return a 200 status code")
+        self.assertTemplateUsed(response, 'index.html', "Index view should use 'index.html' template")
