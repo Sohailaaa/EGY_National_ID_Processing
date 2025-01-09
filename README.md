@@ -57,7 +57,7 @@ These instructions will help you set up and run the project locally.
    python manage.py runserver
 
    ```
-9. Test the API from `api.http` file that send request or using postman
+9. Test the API from `api.http` file that send requests but you need to have `Rest Clint` extension in VS code or using postman
 10. Run the unit testing by running `pytest` in the terminal
 11. from the admin panel; you can track the API calls form Api_Logs database and see the information extracted form valid national Ids
 12. 
